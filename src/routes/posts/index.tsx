@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { PostsPage } from 'src/pages';
-import { Post } from 'src/types';
+import { PostType } from 'src/types';
 
 const PostsPageWrapper = () => {
   const posts = Route.useLoaderData();
@@ -13,7 +13,7 @@ export const Route = createFileRoute('/posts/')({
   component: () => <PostsPageWrapper />,
 });
 
-async function getAllPosts(): Promise<Post[]> {
+async function getAllPosts(): Promise<PostType[]> {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
   return response.json();
 }

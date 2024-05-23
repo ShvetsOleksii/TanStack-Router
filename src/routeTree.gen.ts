@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as PostsIndexImport } from './routes/posts/index'
 import { Route as TodoTodoIdImport } from './routes/todo/$todoId'
+import { Route as PostsPostIdImport } from './routes/posts/$postId'
 
 // Create Virtual Routes
 
@@ -49,6 +50,11 @@ const TodoTodoIdRoute = TodoTodoIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const PostsPostIdRoute = PostsPostIdImport.update({
+  path: '/posts/$postId',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -65,6 +71,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts/$postId': {
+      id: '/posts/$postId'
+      path: '/posts/$postId'
+      fullPath: '/posts/$postId'
+      preLoaderRoute: typeof PostsPostIdImport
       parentRoute: typeof rootRoute
     }
     '/todo/$todoId': {
@@ -96,6 +109,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   AboutLazyRoute,
+  PostsPostIdRoute,
   TodoTodoIdRoute,
   PostsIndexRoute,
   TodoIndexLazyRoute,
