@@ -8,6 +8,9 @@ export const Route = createRootRoute({
         <Link to="/" className="text-sky-400 [&.active]:font-bold">
           Home
         </Link>{' '}
+        <Link to="/auth" className="text-sky-400 [&.active]:font-bold">
+          Authorization
+        </Link>{' '}
         <Link to="/about" className="text-sky-400 [&.active]:font-bold">
           About
         </Link>
