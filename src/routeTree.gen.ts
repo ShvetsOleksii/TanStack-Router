@@ -13,6 +13,8 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ForauthorizedImport } from './routes/for_authorized'
+import { Route as ForadminsImport } from './routes/for_admins'
 import { Route as PostsIndexImport } from './routes/posts/index'
 import { Route as TodoTodoIdImport } from './routes/todo/$todoId'
 import { Route as PostsPostIdImport } from './routes/posts/$postId'
@@ -35,6 +37,16 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const ForauthorizedRoute = ForauthorizedImport.update({
+  path: '/for_authorized',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ForadminsRoute = ForadminsImport.update({
+  path: '/for_admins',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -70,6 +82,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/for_admins': {
+      id: '/for_admins'
+      path: '/for_admins'
+      fullPath: '/for_admins'
+      preLoaderRoute: typeof ForadminsImport
+      parentRoute: typeof rootRoute
+    }
+    '/for_authorized': {
+      id: '/for_authorized'
+      path: '/for_authorized'
+      fullPath: '/for_authorized'
+      preLoaderRoute: typeof ForauthorizedImport
       parentRoute: typeof rootRoute
     }
     '/about': {
@@ -121,6 +147,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
+  ForadminsRoute,
+  ForauthorizedRoute,
   AboutLazyRoute,
   AuthLazyRoute,
   PostsPostIdRoute,

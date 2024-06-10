@@ -7,7 +7,7 @@ type SelectRole = (
 type Props = {
   children: ReactNode;
 };
-type AuthContextType = {
+export type AuthContextType = {
   userRole?: string;
   selectRole: SelectRole;
   logOut: SelectRole;
@@ -24,6 +24,7 @@ export const AuthContextProvider: React.FC<Props> = ({ children }) => {
 
   const selectRole: SelectRole = (role = '') => {
     setUserRole(role);
+    sessionStorage.setItem('userRole', role);
   };
   const logOut: SelectRole = () => {
     selectRole();

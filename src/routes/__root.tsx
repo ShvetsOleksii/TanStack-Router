@@ -1,7 +1,17 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router';
+import {
+  createRootRouteWithContext,
+  Link,
+  Outlet,
+} from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { AuthContextType } from 'src/contexts';
 
-export const Route = createRootRoute({
+interface MyRouterContext {
+  // The ReturnType of your useAuth hook or the value of your AuthContext
+  auth: AuthContextType;
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <>
       <div className="p-2 flex gap-2">
@@ -16,6 +26,15 @@ export const Route = createRootRoute({
         </Link>
         <Link to="/posts" className="text-sky-400 [&.active]:font-bold">
           Posts
+        </Link>
+        <Link
+          to="/for_authorized"
+          className="text-sky-400 [&.active]:font-bold"
+        >
+          For authorized users only
+        </Link>
+        <Link to="/for_admins" className="text-sky-400 [&.active]:font-bold">
+          For administrator
         </Link>
       </div>
       <hr />
